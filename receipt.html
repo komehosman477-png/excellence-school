@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admission Receipt | Excellence School</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #e9edf2;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+        }
+
+        /* ================================
+           RECEIPT PAPER
+        ================================= */
+
+        .receipt {
+            width: 210mm;
+            min-height: 297mm;
+            max-width: 100%;
+            margin: auto;
+            background: #ffffff;
+            padding: 18mm;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            border-bottom: 3px solid #0b3d91;
+            padding-bottom: 18px;
+        }
+
+
+        /* School logo */
+
+        .school-logo {
+            width: 75px;
+            height: 75px;
+            border: 4px solid #0b3d91;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0b3d91;
+            font-size: 42px;
+            font-weight: bold;
+            font-family: Georgia, serif;
+            flex-shrink: 0;
+        }
+
+
+        .school-info {
+            text-align: center;
+        }
+
+        .school-info h1 {
+            margin: 0;
+            color: #0b3d91;
+            font-size: 30px;
+            letter-spacing: 1px;
+        }
+
+        .school-info h2 {
+            margin: 5px 0;
+            font-size: 17px;
+            color: #333;
+            font-weight: normal;
+        }
+
+        .school-info p {
+            margin: 4px 0;
+            font-size: 13px;
+            color: #555;
+        }
+
+
+        /* ================================
+           RECEIPT TITLE
+        ================================= */
+
+        .receipt-heading {
+            text-align: center;
+            margin: 25px 0 20px;
+        }
+
+        .receipt-heading h2 {
+            margin: 0;
+            font-size: 23px;
+            color: #222;
+            letter-spacing: 0.5px;
+        }
+
+        .receipt-heading p {
+            margin: 7px 0 0;
+            color: #666;
+            font-size: 13px;
+        }
+
+
+        /* ================================
+           RECEIPT INFORMATION
+        ================================= */
+
+        .receipt-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            background: #f4f7fb;
+            border: 1px solid #d9e0e8;
+            padding: 12px 15px;
+            margin-bottom: 22px;
+        }
+
+        .meta-item {
+            font-size: 14px;
+        }
+
+        .meta-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+
+        /* ================================
+           SECTION
+        ================================= */
+
+        .section {
+            margin-top: 20px;
+        }
+
+        .section-title {
+            background: #0b3d91;
+            color: white;
+            padding: 9px 12px;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+
+        /* ================================
+           DETAILS TABLE
+        ================================= */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        td {
+            border: 1px solid #d9d9d9;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        td.label {
+            width: 35%;
+            font-weight: bold;
+            background: #f7f7f7;
+            color: #444;
+        }
+
+
+        /* ================================
+           STATUS
+        ================================= */
+
+        .status {
+            margin-top: 22px;
+            padding: 13px;
+            border: 1px solid #b7d8b7;
+            background: #edf8ed;
+            color: #207020;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+
+        /* ================================
+           SIGNATURE / STAMP
+        ================================= */
+
+        .approval-area {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 55px;
+            gap: 50px;
+        }
+
+        .signature-box,
+        .stamp-box {
+            width: 45%;
+            text-align: center;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #222;
+            height: 45px;
+            margin-bottom: 8px;
+        }
+
+        .stamp {
+            width: 95px;
+            height: 95px;
+            border: 2px dashed #777;
+            border-radius: 50%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .approval-label {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        .footer {
+            border-top: 1px solid #ddd;
+            margin-top: 35px;
+            padding-top: 15px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+
+        /* ================================
+           BUTTONS
+        ================================= */
+
+        .buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 25px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .print-btn {
+            background: #0b3d91;
+            color: white;
+        }
+
+        .back-btn {
+            background: #555;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .receipt {
+                width: 100%;
+                min-height: auto;
+                padding: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+            }
+
+            .school-info h1 {
+                font-size: 25px;
+            }
+
+            .receipt-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .approval-area {
+                gap: 20px;
+            }
+
+        }
+
+
+        /* ================================
+           PRINT
+        ================================= */
+
+        @media print {
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .receipt {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 15mm;
+                box-shadow: none;
+                margin: 0;
+            }
+
+            .buttons {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="receipt">
+
+
+    <!-- ================================
+         SCHOOL HEADER
+    ================================= -->
+
+    <div class="header">
+
+        <div class="school-logo">
+            E
+        </div>
+
+
+        <div class="school-info">
+
+            <h1>
+                EXCELLENCE
+            </h1>
+
+            <h2>
+                Junior & Senior Secondary School
+            </h2>
+
+            <p>
+                Mile 91, Sierra Leone
+            </p>
+
+            <p>
+                Excellence in Education • Discipline • Character
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================
+         RECEIPT TITLE
+    ================================= -->
+
+    <div class="receipt-heading">
+
+        <h2>
+            ADMISSION APPLICATION RECEIPT
+        </h2>
+
+        <p>
+            Official acknowledgement of admission application
+        </p>
+
+    </div>
+
+
+
+    <!-- ================================
+         RECEIPT NUMBER & DATE
+    ================================= -->
+
+    <div class="receipt-meta">
+
+        <div class="meta-item">
+
+            <span class="meta-label">
+                Receipt No:
+            </span>
+
+            <span id="receiptNumber">
+                Loading...
+            </span>
+
+        </div>
+
+
+        <div class="meta-item">
+
+            <span class="meta-label">
+                Application ID:
+            </span>
+
+            <span id="applicationId">
+                Loading...
+            </span>
+
+        </div>
+
+
+        <div class="meta-item">
+
+            <span class="meta-label">
+                Date:
+            </span>
+
+            <span id="applicationDate">
+                Loading...
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================
+         APPLICANT INFORMATION
+    ================================= -->
+
+    <div class="section">
+
+        <div class="section-title">
+            APPLICANT INFORMATION
+        </div>
+
+
+        <table>
+
+            <tr>
+
+                <td class="label">
+                    Full Name
+                </td>
+
+                <td id="studentName">
+                    Loading...
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td class="label">
+                    Date of Birth
+                </td>
+
+                <td id="dateOfBirth">
+                    Loading...
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td class="label">
+                    Gender
+                </td>
+
+                <td id="gender">
+                    Loading...
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td class="label">
+                    Class Applying For
+                </td>
+
+                <td id="classApplying">
+                    Loading...
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- ================================
+         GUARDIAN INFORMATION
+    ================================= -->
+
+    <div class="section">
+
+        <div class="section-title">
+            PARENT / GUARDIAN INFORMATION
+        </div>
+
+
+        <table>
+
+            <tr>
+
+                <td class="label">
+                    Guardian Name
+                </td>
+
+                <td id="guardianName">
+                    Loading...
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td class="label">
+                    Relationship
+                </td>
+
+                <td id="relationship">
+                    Loading...
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td class="label">
+                    Phone
+                </td>
+
+                <td id="phone">
+                    Loading...
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td class="label">
+                    Email
+                </td>
+
+                <td id="email">
+                    Loading...
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td class="label">
+                    Address
+                </td>
+
+                <td id="address">
+                    Loading...
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- ================================
+         STATUS
+    ================================= -->
+
+    <div class="status">
+
+        ✓ APPLICATION RECEIVED SUCCESSFULLY
+
+    </div>
+
+
+
+    <!-- ================================
+         SIGNATURE / STAMP
+    ================================= -->
+
+    <div class="approval-area">
+
+
+        <div class="signature-box">
+
+            <div class="signature-line"></div>
+
+            <div class="approval-label">
+                Authorized Signature
+            </div>
+
+        </div>
+
+
+        <div class="stamp-box">
+
+            <div class="stamp">
+                SCHOOL<br>
+                STAMP
+            </div>
+
+            <div class="approval-label">
+                Official School Stamp
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <div class="footer">
+
+        <strong>
+            EXCELLENCE JUNIOR & SENIOR SECONDARY SCHOOL
+        </strong>
+
+        <br>
+
+        Please keep this receipt for your records.
+
+        <br>
+
+        This receipt confirms that the admission application
+        has been received by the school.
+
+    </div>
+
+
+
+    <!-- ================================
+         BUTTONS
+    ================================= -->
+
+    <div class="buttons">
+
+        <button
+            class="print-btn"
+            onclick="window.print()">
+
+            🖨 Print / Save as PDF
+
+        </button>
+
+
+        <button
+            class="back-btn"
+            onclick="history.back()">
+
+            ← Back to Admissions
+
+        </button>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+    // ==========================================
+    // GET APPLICATION ID FROM URL
+    // ==========================================
+
+    const urlParams =
+        new URLSearchParams(window.location.search);
+
+    const applicationId =
+        urlParams.get("id");
+
+
+    if (!applicationId) {
+
+        alert("No application ID was provided.");
+
+    } else {
+
+
+        // ==========================================
+        // GET APPLICATION FROM DATABASE
+        // ==========================================
+
+        fetch(`/api/admissions/${applicationId}`)
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Application could not be retrieved."
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+
+            .then(data => {
+
+                if (!data.success) {
+
+                    alert(
+                        data.message ||
+                        "Application not found."
+                    );
+
+                    return;
+
+                }
+
+
+                const application =
+                    data.application;
+
+
+                // ==========================================
+                // RECEIPT INFORMATION
+                // ==========================================
+
+                document.getElementById(
+                    "applicationId"
+                ).textContent =
+                    application.id;
+
+
+                document.getElementById(
+                    "receiptNumber"
+                ).textContent =
+                    "ADM-" +
+                    String(application.id).padStart(6, "0");
+
+
+                // ==========================================
+                // DATE
+                // ==========================================
+
+                let dateValue =
+                    application.application_date;
+
+
+                if (dateValue) {
+
+                    const date =
+                        new Date(dateValue);
+
+                    document.getElementById(
+                        "applicationDate"
+                    ).textContent =
+                        date.toLocaleDateString(
+                            "en-GB",
+                            {
+                                day: "2-digit",
+                                month: "long",
+                                year: "numeric"
+                            }
+                        );
+
+                } else {
+
+                    document.getElementById(
+                        "applicationDate"
+                    ).textContent =
+                        new Date().toLocaleDateString(
+                            "en-GB",
+                            {
+                                day: "2-digit",
+                                month: "long",
+                                year: "numeric"
+                            }
+                        );
+
+                }
+
+
+                // ==========================================
+                // APPLICANT INFORMATION
+                // ==========================================
+
+                document.getElementById(
+                    "studentName"
+                ).textContent =
+                    application.first_name +
+                    " " +
+                    application.last_name;
+
+
+                document.getElementById(
+                    "dateOfBirth"
+                ).textContent =
+                    application.date_of_birth;
+
+
+                document.getElementById(
+                    "gender"
+                ).textContent =
+                    application.gender;
+
+
+                document.getElementById(
+                    "classApplying"
+                ).textContent =
+                    application.class_applying_for;
+
+
+                // ==========================================
+                // GUARDIAN INFORMATION
+                // ==========================================
+
+                document.getElementById(
+                    "guardianName"
+                ).textContent =
+                    application.guardian_name;
+
+
+                document.getElementById(
+                    "relationship"
+                ).textContent =
+                    application.relationship;
+
+
+                document.getElementById(
+                    "phone"
+                ).textContent =
+                    application.phone;
+
+
+                document.getElementById(
+                    "email"
+                ).textContent =
+                    application.email;
+
+
+                document.getElementById(
+                    "address"
+                ).textContent =
+                    application.address;
+
+            })
+
+
+            .catch(error => {
+
+                console.error(
+                    "Receipt error:",
+                    error
+                );
+
+                alert(
+                    "Unable to load application information."
+                );
+
+            });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
